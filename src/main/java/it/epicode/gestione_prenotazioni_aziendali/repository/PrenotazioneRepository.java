@@ -1,0 +1,12 @@
+package it.epicode.gestione_prenotazioni_aziendali.repository;
+
+import it.epicode.gestione_prenotazioni_aziendali.model.Prenotazione;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
+
+import java.time.LocalDate;
+
+public interface PrenotazioneRepository  extends JpaRepository<Prenotazione, Integer>, PagingAndSortingRepository<Prenotazione, Integer> {
+
+    boolean existsByDipendenteIdAndDataRichiesta(Integer dipendenteId, LocalDate dataRichiesta);
+}
