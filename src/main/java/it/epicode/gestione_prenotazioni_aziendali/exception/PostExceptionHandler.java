@@ -13,17 +13,7 @@ import java.util.stream.Collectors;
 @RestControllerAdvice
 public class PostExceptionHandler {
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ApiError handleMethodArgumentNotValid(MethodArgumentNotValidException ex) {
-        String messages = ex.getBindingResult().getAllErrors().stream()
-                .map(ObjectError::getDefaultMessage)
-                .collect(Collectors.joining("; "));
-        ApiError error = new ApiError();
-        error.setMessage(messages);
-        error.setDataErrore(LocalDateTime.now());
-        return error;
-    }
+
 
     @ExceptionHandler(NotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)

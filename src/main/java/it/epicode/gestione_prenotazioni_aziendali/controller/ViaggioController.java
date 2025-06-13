@@ -1,6 +1,7 @@
 package it.epicode.gestione_prenotazioni_aziendali.controller;
 
 import it.epicode.gestione_prenotazioni_aziendali.dto.ViaggioDto;
+import it.epicode.gestione_prenotazioni_aziendali.enumaration.StatoViaggio;
 import it.epicode.gestione_prenotazioni_aziendali.exception.NotFoundException;
 import it.epicode.gestione_prenotazioni_aziendali.exception.ValidationException;
 import it.epicode.gestione_prenotazioni_aziendali.model.Viaggio;
@@ -53,7 +54,7 @@ public class ViaggioController{
                     .map(objectError -> objectError.getDefaultMessage())
                     .reduce("", (e, s) -> e + s));
         }
-        return viaggioService.getViaggio(id);
+        return viaggioService.updateViaggio(id, viaggioDto);
     }
 
     @DeleteMapping("/{id}")
@@ -61,5 +62,14 @@ public class ViaggioController{
     public void deleteViaggio(@PathVariable int id) throws NotFoundException {
         viaggioService.deleteViaggio(id);
     }
+
+    @PatchMapping("/{id}/status")
+    public Viaggio changeStatus(@PathVariable int id,
+                                @RequestParam StatoViaggio stato) throws NotFoundException {
+        return viaggioService.changeStatus(id, stato);
+    }
+
+
+
 
 }

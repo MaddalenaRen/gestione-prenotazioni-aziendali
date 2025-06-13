@@ -21,4 +21,6 @@ public class DipendenteDto {
     @Email(message = "Formato email non valido")
     @NotEmpty(message = "L'email non può essere nulla o vuota")
     private String email;
+
+
 }

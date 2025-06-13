@@ -3,6 +3,7 @@ package it.epicode.gestione_prenotazioni_aziendali.service;
 
 import com.cloudinary.Cloudinary;
 import it.epicode.gestione_prenotazioni_aziendali.dto.ViaggioDto;
+import it.epicode.gestione_prenotazioni_aziendali.enumaration.StatoViaggio;
 import it.epicode.gestione_prenotazioni_aziendali.exception.NotFoundException;
 import it.epicode.gestione_prenotazioni_aziendali.model.Prenotazione;
 import it.epicode.gestione_prenotazioni_aziendali.model.Viaggio;
@@ -62,6 +63,14 @@ public class ViaggioService {
         Viaggio viaggioDaRimuovere = getViaggio(id);
 
         viaggioRepository.delete(viaggioDaRimuovere);
+    }
+
+    public Viaggio changeStatus(int id, StatoViaggio nuovoStato) throws NotFoundException {
+        Viaggio viaggio = viaggioRepository.findById(id).
+                orElseThrow(() -> new NotFoundException("Viaggio con id " + id + " non trovato"));
+        viaggio.setStatoViaggio(nuovoStato);
+        return viaggioRepository.save(viaggio);
+
     }
 
 
